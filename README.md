@@ -4,7 +4,7 @@ An AI-powered system that analyzes legal contracts (focused on NDAs) to extract 
 
 ---
 
-## 🚩 Problem Statement
+## Problem Statement
 
 Startups, freelancers, and small businesses often sign legal contracts without fully understanding the risks.
 
