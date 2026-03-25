@@ -10,15 +10,15 @@ from dotenv import load_dotenv
 load_dotenv()
 import re
 try:
-    import fitz  # PyMuPDF < 1.24
+    import fitz 
 except ImportError:
-    import pymupdf as fitz  # PyMuPDF >= 1.24
+    import pymupdf as fitz  
 from typing import List, Dict
 
 import os
 
 SECTION_PATTERNS = [
-    r"^(\d+\.\s+[A-Z][A-Za-z\s]{3,60})$",         # 1. Definitions
+    r"^(\d+\.\s+[A-Z][A-Za-z\s]{3,60})$",         # Definitions
     r"^(Section\s+\d+[\.:]\s+.{3,60})$",          # Section 1: ...
     r"^(Article\s+[IVXLC\d]+[\.:]\s+.{3,60})$",   # Article IV: ...
     r"^([A-Z][A-Z\s]{5,40})$",                    # ALL CAPS (shorter range)
@@ -70,8 +70,6 @@ def regex_segment(text: str) -> List[Dict]:
             current_lines = []
         else:
             current_lines.append(line)
-
-    # flush last segment
     if current_lines:
         body = " ".join(l.strip() for l in current_lines if l.strip())
         if body:
@@ -119,7 +117,7 @@ Document:
 
         raw = response.choices[0].message.content.strip()
 
-        # 🔥 CLEAN JSON (important for Groq)
+        # CLEAN JSON 
         start = raw.find("[")
         end = raw.rfind("]") + 1
         cleaned = raw[start:end]
@@ -163,13 +161,20 @@ def ingest_pdf(path: str) -> List[Dict]:
     Main entry point.
     Returns list of segment dicts: {title, text}
     """
-    raw_text = extract_text_from_pdf(path)
+    try:
+        raw_text = extract_text_from_pdf(path)
 
-    if not raw_text.strip():
-        raise ValueError(
-            "PDF appears to be a scanned image with no extractable text."
-        )
+        if not raw_text.strip():
+            return [{
+            "title": "Error",
+            "text": "Invalid or unreadable document (possibly scanned PDF)"
+        }]
 
+    except Exception as e:
+        return [{
+            "title": "Error",
+            "text": f"Failed to process document: {str(e)}"
+        }]
     # Step 1: Regex segmentation
     segments = regex_segment(raw_text)
 
