@@ -119,15 +119,22 @@ class LegalAgent:
     # LangChain tools
     # -----------------------------------------------------------------------
     def _tool_compare_clause(self, clause: str) -> str:
-        """Compare clause against gold-standard templates."""
         matches = self._find_similar_template(clause, k=1)
         if not matches:
             return "No comparable standard clause found."
+
         m = matches[0]
+        similarity = m["similarity"]
+        threshold = 0.80
+
+        # 🔥 ADD THESE LINES
+        print(f"[DEBUG] Similarity score: {similarity}")
+        print(f"[DEBUG] Threshold: {threshold}")
+
         return (
-            f"Most similar standard: [{m['category']}] (similarity: {m['similarity']})\n"
+            f"Most similar standard: [{m['category']}] (similarity: {similarity})\n"
             f"Standard text: {m['text']}\n"
-            f"Deviation detected: {'Yes' if m['similarity'] < 0.80 else 'No significant deviation'}"
+            f"Deviation detected: {'Yes' if similarity < threshold else 'No significant deviation'}"
         )
 
     def _tool_suggest_redline(self, clause: str) -> str:
