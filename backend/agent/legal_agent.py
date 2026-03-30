@@ -145,7 +145,7 @@ class LegalAgent:
         )
 
         response = self.client.chat.completions.create(
-            model="groq/compound",
+            model="llama-3.3-70b-versatile",
             messages=[{"role": "user", "content": prompt}]
         )
 
@@ -159,7 +159,7 @@ class LegalAgent:
             f"Clause: {clause}"
         )
         response = self.client.chat.completions.create(
-        model="groq/compound",
+        model="llama-3.3-70b-versatile",
         messages=[{"role": "user", "content": prompt}]
 )
 
@@ -188,7 +188,7 @@ class LegalAgent:
     """
 
         response = self.client.chat.completions.create(
-            model="groq/compound",
+            model="llama-3.3-70b-versatile",
             messages=[{"role": "user", "content": prompt}]
         )
 
@@ -204,7 +204,7 @@ class LegalAgent:
         """
 
         response = self.client.chat.completions.create(
-            model="groq/compound",
+            model="llama-3.3-70b-versatile",
             messages=[{"role": "user", "content": prompt}]
         )
 
