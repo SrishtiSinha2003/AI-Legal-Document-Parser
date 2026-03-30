@@ -144,14 +144,6 @@ npm run dev
 
 ---
 
-## 📅 Development Progress
-
-- ✅ **Day 1** – Problem definition, architecture, and scope  
-- ✅ **Day 2** – PDF ingestion + segmentation pipeline (Regex + LLM)  
-- 🔜 **Day 3** – Named Entity Recognition (spaCy)  
-
----
-
 ## 🧠 Key Learnings
 
 - Hybrid systems (rule-based + LLM) improve robustness  
