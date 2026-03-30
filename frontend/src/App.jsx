@@ -59,7 +59,15 @@ export default function App() {
       <header className="app-header">
         <div className="app-header-inner">
           <div className="brand">
-            <span className="brand-mark" aria-hidden="true" />
+            <span className="brand-mark" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                <polyline points="14 2 14 8 20 8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                <line x1="16" y1="13" x2="8" y2="13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+                <line x1="16" y1="17" x2="8" y2="17" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+                <polyline points="10 9 9 9 8 9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+              </svg>
+            </span>
             <div>
               <p className="brand-kicker">Contract intelligence</p>
               <h1 className="brand-title">Legal Document Analyzer</h1>
@@ -68,6 +76,19 @@ export default function App() {
           <p className="brand-tagline">
             Upload a PDF to extract clauses, score risk, and ask questions in plain English.
           </p>
+          <div className="workflow-steps">
+            <div className={`workflow-step ${!data && !loading ? 'step-active' : 'step-done'}`}>
+              <span className="step-num">1</span><span className="step-label">Upload PDF</span>
+            </div>
+            <span className="step-divider" aria-hidden="true" />
+            <div className={`workflow-step ${loading ? 'step-active' : data ? 'step-done' : ''}`}>
+              <span className="step-num">2</span><span className="step-label">Analyze</span>
+            </div>
+            <span className="step-divider" aria-hidden="true" />
+            <div className={`workflow-step ${data ? 'step-active' : ''}`}>
+              <span className="step-num">3</span><span className="step-label">Review &amp; Chat</span>
+            </div>
+          </div>
         </div>
       </header>
 

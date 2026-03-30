@@ -30,7 +30,7 @@ function ClauseCard({ segment, index }) {
           <div className="clause-right">
             {segment.risk_flags?.length > 0 && (
               <span className="flag-count" title={segment.risk_flags.join(", ")}>
-                {segment.risk_flags.length} flags
+                ⚑ {segment.risk_flags.length}
               </span>
             )}
             <span className="risk-badge" style={{ background: r.dot }}>
@@ -43,7 +43,7 @@ function ClauseCard({ segment, index }) {
         </div>
       </button>
 
-      {expanded && (
+      <div className={`clause-body-wrap ${expanded ? "clause-body-open" : ""}`}>
         <div className="clause-body">
           <p className="clause-text">{segment.text}</p>
 
@@ -71,16 +71,19 @@ function ClauseCard({ segment, index }) {
             </div>
           )}
         </div>
-      )}
+      </div>
     </article>
   );
 }
 
 export default function RiskHeatmap({ segments }) {
   const [filter, setFilter] = useState("all");
+  const [search, setSearch] = useState("");
 
-  const filtered =
-    filter === "all" ? segments : segments.filter((s) => s.risk === filter);
+  const filtered = segments
+    .filter((s) => filter === "all" || s.risk === filter)
+    .filter((s) => !search || (s.title + " " + s.text + " " + s.category)
+      .toLowerCase().includes(search.toLowerCase()));
 
   return (
     <div className="heatmap">
@@ -95,6 +98,23 @@ export default function RiskHeatmap({ segments }) {
             {f === "all" ? "All" : f.charAt(0).toUpperCase() + f.slice(1)}
           </button>
         ))}
+        <div className="heatmap-search-wrap">
+          <svg className="heatmap-search-icon" viewBox="0 0 16 16" fill="none">
+            <circle cx="6.5" cy="6.5" r="4.5" stroke="currentColor" strokeWidth="1.4"/>
+            <path d="M10 10l3 3" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round"/>
+          </svg>
+          <input
+            className="heatmap-search"
+            type="text"
+            placeholder="Search clauses…"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            aria-label="Search clauses"
+          />
+          {search && (
+            <button className="heatmap-search-clear" onClick={() => setSearch("")} aria-label="Clear search">×</button>
+          )}
+        </div>
         <span className="heatmap-count">{filtered.length} shown</span>
       </div>
 

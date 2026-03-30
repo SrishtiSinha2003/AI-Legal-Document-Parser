@@ -89,7 +89,78 @@ p {
   border: 0;
 }
 
-/* ——— App shell ——— */
+/* ——— Workflow steps ——— */
+.workflow-steps {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.workflow-step {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--ink-faint);
+  transition: color 0.3s;
+}
+
+.workflow-step.step-active {
+  color: var(--accent);
+}
+
+.workflow-step.step-done {
+  color: var(--teal);
+}
+
+.step-num {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1.5px solid currentColor;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65rem;
+  flex-shrink: 0;
+}
+
+.step-done .step-num::before {
+  content: "✓";
+}
+
+.step-done .step-num {
+  font-size: 0;
+}
+
+.step-divider {
+  flex: 0 0 24px;
+  height: 1px;
+  background: var(--border-strong);
+}
+
+/* ——— Brand mark icon ——— */
+.brand-mark {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--accent) 0%, #8b6914 100%);
+  box-shadow: 0 0 0 1px var(--accent-glow), var(--shadow-soft);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(5, 7, 13, 0.75);
+}
+
+.brand-mark svg {
+  width: 22px;
+  height: 22px;
+}
+
 .app {
   position: relative;
   min-height: 100svh;
