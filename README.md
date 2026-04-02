@@ -152,16 +152,4 @@ npm run dev
 
 ---
 
-## 🚀 Future Enhancements
 
-- Support for multiple contract types  
-- Fine-tuned legal LLM  
-- Clause rewriting suggestions  
-- Integration with e-sign platforms  
-
----
-
-
-## ⭐ If you like this project
-
-Give it a ⭐ on GitHub!
